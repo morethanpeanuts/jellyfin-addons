@@ -1,146 +1,62 @@
-# Jellyfin Custom External Links
+<h1 align="center">
+  Jellyfin Addons
+</h1>
 
-This project lets one Jellyfin JavaScript Injector entry load your custom external-link behavior, provider configuration, CSS, and provider logo assets from GitHub.
+<p align="center">
+  Small Jellyfin web customizations, JavaScript Injector addons, CSS tweaks, and reusable assets.
+</p>
 
-## How It Works
+<p align="center">
+  <a href="ADDONS.md">
+    <img alt="Addons" src="https://img.shields.io/badge/Addons-browse-00a4dc?style=for-the-badge">
+  </a>
+  <a href="#using-an-addon">
+    <img alt="Setup" src="https://img.shields.io/badge/Setup-guide-6c5ce7?style=for-the-badge">
+  </a>
+  <a href="#notes">
+    <img alt="Jellyfin" src="https://img.shields.io/badge/Jellyfin-JavaScript%20Injector-111827?style=for-the-badge">
+  </a>
+</p>
 
-Jellyfin only needs the small script in `injector.js`.
+## About
 
-That script loads:
+This repository is a home for multiple Jellyfin addons.
 
-```text
-styles/external-links.css
-src/providers.js
-src/external-links.js
-```
+Each addon gets its own folder, README, setup steps, source files, styles, and assets. That keeps the repo clean as it grows instead of mixing every script and image together in the root folder.
 
-The provider config lives in `src/providers.js`. Each provider maps a display name, one or more domains, and a logo asset path:
+## Addons
 
-```javascript
-{
-    key: "newgrounds",
-    displayName: "Newgrounds",
-    domains: ["newgrounds.com", "www.newgrounds.com"],
-    asset: "assets/Newgrounds/image.png",
-}
-```
+See [ADDONS.md](ADDONS.md) for the full addon list.
 
-The scanner in `src/external-links.js` looks for configured provider URLs in a Jellyfin detail-page description, removes those raw URLs from the description, and adds Jellyfin-style external-link buttons for them.
+| Addon | What It Does |
+| --- | --- |
+| [Extra External Links Addon](extra-external-links-addon/) | Finds provider URLs in Jellyfin item descriptions, removes the raw URLs, and adds Jellyfin-style external-link buttons with provider logos. |
 
-## Why There Is Still A Small Loader
-
-Browser JavaScript does not have a plain `@import` syntax like CSS.
-
-There is ES module `import`, but it can be awkward inside Jellyfin script injection because module loading, execution order, and cross-origin headers can be stricter than normal scripts.
-
-So this project uses the most reliable setup:
-
-1. Paste one small classic script into Jellyfin.
-2. That script loads the CSS.
-3. That script loads provider config first.
-4. That script loads the external-link behavior second.
-
-That gives you one Jellyfin entry while keeping the GitHub project easy to edit.
-
-## Project Structure
+## Repo Layout
 
 ```text
-jellyfin-custom
+jellyfin-addons
 ├── README.md
-├── injector.js
-├── src
-│   ├── providers.js
-│   └── external-links.js
-├── styles
-│   └── external-links.css
-└── assets
-    ├── Newgrounds
-    │   └── image.png
-    └── Youtube
-        └── image.png
+├── ADDONS.md
+└── extra-external-links-addon
+    ├── README.md
+    ├── injector.js
+    ├── src
+    ├── styles
+    └── assets
 ```
 
-## Create The GitHub Project
+## Using An Addon
 
-1. Go to GitHub and create a new repository.
-2. Name it:
+1. Open [ADDONS.md](ADDONS.md).
+2. Pick the addon you want.
+3. Open that addon's folder.
+4. Follow the setup steps in that addon's README.
 
-```text
-jellyfin-custom
-```
+Most addons are designed so Jellyfin only needs one small script pasted into JavaScript Injector. After that, updates can be made from GitHub.
 
-3. Set it to `Public`.
-4. Add these files and folders to the repository.
-5. Upload your provider images:
+## Notes
 
-```text
-assets/Newgrounds/image.png
-assets/Youtube/image.png
-```
+These addons are personal Jellyfin web customizations. They are not official Jellyfin plugins.
 
-## Update The Injector URL
-
-Open `injector.js` and change this:
-
-```javascript
-const PROJECT_BASE =
-    "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/jellyfin-custom@main/";
-```
-
-to your real GitHub username:
-
-```javascript
-const PROJECT_BASE =
-    "https://cdn.jsdelivr.net/gh/my-github-name/jellyfin-custom@main/";
-```
-
-## Paste Into Jellyfin
-
-In Jellyfin JavaScript Injector, paste the full contents of `injector.js`.
-
-That is the only Jellyfin-side script you need.
-
-## Add A New Provider
-
-1. Create a new folder:
-
-```text
-assets/ProviderName/image.png
-```
-
-2. Add a provider entry in `src/providers.js`:
-
-```javascript
-{
-    key: "providername",
-    displayName: "Provider Name",
-    domains: ["provider.com", "www.provider.com"],
-    asset: "assets/ProviderName/image.png",
-}
-```
-
-3. Commit the changes to GitHub.
-
-## Cache Notes
-
-jsDelivr caches GitHub files. If you change a file and Jellyfin does not update right away, purge the URL at:
-
-```text
-https://www.jsdelivr.com/tools/purge
-```
-
-You can purge specific files, such as:
-
-```text
-https://cdn.jsdelivr.net/gh/YOUR_USERNAME/jellyfin-custom@main/src/providers.js
-```
-
-## Troubleshooting
-
-If links do not appear:
-
-1. Make sure the raw provider URL is in the Jellyfin item description.
-2. Make sure the provider domain is listed in `src/providers.js`.
-3. Open the browser console and temporarily set `debug: true` in `src/providers.js`.
-4. Make sure the asset file exists at the configured path.
-5. Make sure the GitHub repository is public.
+For JavaScript Injector addons, browser JavaScript cannot use CSS-style `@import`. If an addon needs multiple files, its folder includes a tiny `injector.js` entry script that loads the needed CSS, config, and JavaScript in a reliable order.
