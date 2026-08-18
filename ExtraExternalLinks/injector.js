@@ -8,7 +8,7 @@
      * Keep the repo public if you want to use jsDelivr.
      */
     const PROJECT_BASE =
-        "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/YOUR_REPO@main/ExtraExternalLinks/";
+        "https://cdn.jsdelivr.net/gh/morethanpeanuts/jellyfin-addons@main/ExtraExternalLinks/";
     const DEBUG = true;
 
     const FILES = {
