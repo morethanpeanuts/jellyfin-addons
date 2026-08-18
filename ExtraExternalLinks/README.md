@@ -7,15 +7,9 @@
 </p>
 
 <p align="center">
-  <a href="../ADDONS.md">
-    <img alt="All Addons" src="https://img.shields.io/badge/All%20Addons-index-00a4dc?style=for-the-badge">
-  </a>
-  <a href="src/providers.js">
-    <img alt="Providers" src="https://img.shields.io/badge/Providers-config-6c5ce7?style=for-the-badge">
-  </a>
-  <a href="injector.js">
-    <img alt="Injector" src="https://img.shields.io/badge/Jellyfin-injector-111827?style=for-the-badge">
-  </a>
+  <a href="../ADDONS.md"><img alt="All Addons" src="../docs/assets/badge-all-addons.svg"></a>
+  <a href="src/providers.js"><img alt="Providers" src="../docs/assets/badge-providers.svg"></a>
+  <a href="injector.js"><img alt="Injector" src="../docs/assets/badge-injector.svg"></a>
 </p>
 
 ## What It Does
@@ -34,7 +28,7 @@ Example providers are already included for Newgrounds and YouTube.
 ## Folder Layout
 
 ```text
-extra-external-links-addon
+ExtraExternalLinks
 ├── README.md
 ├── injector.js
 ├── src
@@ -55,7 +49,7 @@ Open `injector.js` and change:
 
 ```javascript
 const PROJECT_BASE =
-    "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/YOUR_REPO@main/extra-external-links-addon/";
+    "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/YOUR_REPO@main/ExtraExternalLinks/";
 ```
 
 Replace `YOUR_USERNAME` and `YOUR_REPO` with your real GitHub username and repository name.
@@ -64,7 +58,7 @@ Example:
 
 ```javascript
 const PROJECT_BASE =
-    "https://cdn.jsdelivr.net/gh/myname/jellyfin-addons@main/extra-external-links-addon/";
+    "https://cdn.jsdelivr.net/gh/myname/jellyfin-addons@main/ExtraExternalLinks/";
 ```
 
 Then paste the full contents of `injector.js` into Jellyfin JavaScript Injector.
@@ -138,7 +132,7 @@ https://www.jsdelivr.com/tools/purge
 Example file URL:
 
 ```text
-https://cdn.jsdelivr.net/gh/YOUR_USERNAME/YOUR_REPO@main/extra-external-links-addon/src/providers.js
+https://cdn.jsdelivr.net/gh/YOUR_USERNAME/YOUR_REPO@main/ExtraExternalLinks/src/providers.js
 ```
 
 ## Troubleshooting

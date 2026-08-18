@@ -16,13 +16,13 @@
                 key: "newgrounds",
                 displayName: "Newgrounds",
                 domains: ["newgrounds.com", "www.newgrounds.com"],
-                asset: "assets/Newgrounds/image.png",
+                asset: "assets/newgrounds/image.png",
             },
             {
                 key: "youtube",
                 displayName: "YouTube",
                 domains: ["youtube.com", "www.youtube.com", "youtu.be"],
-                asset: "assets/Youtube/image.png",
+                asset: "assets/youtube/image.png",
             },
         ],
     };

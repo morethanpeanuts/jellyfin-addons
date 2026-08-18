@@ -7,15 +7,9 @@
 </p>
 
 <p align="center">
-  <a href="ADDONS.md">
-    <img alt="Addons" src="https://img.shields.io/badge/Addons-browse-00a4dc?style=for-the-badge">
-  </a>
-  <a href="#using-an-addon">
-    <img alt="Setup" src="https://img.shields.io/badge/Setup-guide-6c5ce7?style=for-the-badge">
-  </a>
-  <a href="#notes">
-    <img alt="Jellyfin" src="https://img.shields.io/badge/Jellyfin-JavaScript%20Injector-111827?style=for-the-badge">
-  </a>
+  <a href="ADDONS.md"><img alt="Addons" src="docs/assets/badge-addons.svg"></a>
+  <a href="#using-an-addon"><img alt="Setup" src="docs/assets/badge-setup.svg"></a>
+  <a href="#notes"><img alt="Notes" src="docs/assets/badge-notes.svg"></a>
 </p>
 
 ## About
@@ -28,9 +22,16 @@ Each addon gets its own folder, README, setup steps, source files, styles, and a
 
 See [ADDONS.md](ADDONS.md) for the full addon list.
 
-| Addon | What It Does |
-| --- | --- |
-| [Extra External Links Addon](extra-external-links-addon/) | Finds provider URLs in Jellyfin item descriptions, removes the raw URLs, and adds Jellyfin-style external-link buttons with provider logos. |
+<table>
+  <tr>
+    <th align="left" width="260">Addon</th>
+    <th align="left">What It Does</th>
+  </tr>
+  <tr>
+    <td><a href="ExtraExternalLinks/"><strong>Extra External Links Addon</strong></a></td>
+    <td>Finds provider URLs in Jellyfin item descriptions, removes the raw URLs, and adds Jellyfin-style external-link buttons with provider logos.</td>
+  </tr>
+</table>
 
 ## Repo Layout
 
@@ -38,7 +39,7 @@ See [ADDONS.md](ADDONS.md) for the full addon list.
 jellyfin-addons
 ├── README.md
 ├── ADDONS.md
-└── extra-external-links-addon
+└── ExtraExternalLinks
     ├── README.md
     ├── injector.js
     ├── src
