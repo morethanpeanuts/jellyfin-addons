@@ -25,7 +25,7 @@
                 key: "youtube",
                 displayName: "YouTube",
                 domains: ["youtube.com", "www.youtube.com", "youtu.be"],
-                asset: "assets/newgrounds/image.png",
+                asset: "assets/youtube/image.png",
                 logoHeight: 25,
             },
         ],
