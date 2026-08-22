@@ -7,7 +7,7 @@
      * asset is relative to the project root, so:
      * assets/newgrounds/image.png
      * becomes:
-     * https://cdn.jsdelivr.net/gh/YOUR_USERNAME/jellyfin-custom@main/assets/Newgrounds/image.png
+     * https://cdn.jsdelivr.net/gh/YOUR_USERNAME/jellyfin-custom@main/assets/newgrounds/image.png
      */
     window.JELLYFIN_EXTERNAL_LINKS_CONFIG = {
         debug: false,
