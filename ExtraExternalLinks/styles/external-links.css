@@ -8,8 +8,8 @@
 .jellyfin-provider-link[data-provider-key]::before {
     content: "";
     display: inline-block;
-    width: 145px;
-    height: 25px;
+    width: var(--provider-logo-width, 145px);
+    height: var(--provider-logo-height, 25px);
     margin-right: 5px;
     vertical-align: middle;
     background-image: var(--provider-logo);

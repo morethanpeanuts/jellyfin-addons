@@ -12,6 +12,9 @@
     const DEBUG = Boolean(CONFIG.debug);
     const URL_PATTERN = /https?:\/\/[^\s<>"']+/gi;
     const PROCESSED_ATTR = "data-jellyfin-external-links-processed";
+    const DEFAULT_LOGO_HEIGHT = Number(CONFIG.defaultLogoHeight) || 25;
+    const FALLBACK_LOGO_WIDTH = Number(CONFIG.fallbackLogoWidth) || 145;
+    const imageSizeCache = new Map();
 
     function log(...args) {
         if (DEBUG) {
@@ -130,9 +133,79 @@
             || document.querySelector(".itemExternalLinks a[href]");
     }
 
+    function numberToPx(value, fallback) {
+        if (typeof value === "number" && Number.isFinite(value)) {
+            return `${value}px`;
+        }
+
+        if (typeof value === "string" && value.trim()) {
+            return value;
+        }
+
+        return `${fallback}px`;
+    }
+
+    function providerLogoHeight(provider) {
+        return Number(provider.logoHeight) || DEFAULT_LOGO_HEIGHT;
+    }
+
+    function providerLogoWidth(provider) {
+        return provider.logoWidth || provider.width || null;
+    }
+
+    function applyLogoSize(link, provider, assetUrl) {
+        const height = providerLogoHeight(provider);
+        const configuredWidth = providerLogoWidth(provider);
+
+        link.style.setProperty("--provider-logo-height", numberToPx(provider.logoHeight, height));
+
+        if (configuredWidth) {
+            link.style.setProperty("--provider-logo-width", numberToPx(configuredWidth, FALLBACK_LOGO_WIDTH));
+            return;
+        }
+
+        link.style.setProperty("--provider-logo-width", `${FALLBACK_LOGO_WIDTH}px`);
+        detectLogoWidth(assetUrl, height)
+            .then((width) => {
+                link.style.setProperty("--provider-logo-width", `${width}px`);
+                log("Detected logo width", provider.displayName, width);
+            })
+            .catch((error) => {
+                log("Could not detect logo width", provider.displayName, error);
+            });
+    }
+
+    function detectLogoWidth(assetUrl, height) {
+        const cacheKey = `${assetUrl}|${height}`;
+
+        if (imageSizeCache.has(cacheKey)) {
+            return imageSizeCache.get(cacheKey);
+        }
+
+        const promise = new Promise((resolve, reject) => {
+            const image = new Image();
+
+            image.onload = () => {
+                if (!image.naturalWidth || !image.naturalHeight) {
+                    reject(new Error("Image has no natural size."));
+                    return;
+                }
+
+                resolve(Math.round((image.naturalWidth / image.naturalHeight) * height));
+            };
+
+            image.onerror = () => reject(new Error(`Failed to load logo: ${assetUrl}`));
+            image.src = assetUrl;
+        });
+
+        imageSizeCache.set(cacheKey, promise);
+        return promise;
+    }
+
     function createProviderLink(container, provider, url) {
         const template = findTemplateLink(container);
         const link = template ? template.cloneNode(true) : document.createElement("a");
+        const assetUrl = absoluteUrl(provider.asset);
 
         link.href = url;
         link.target = "_blank";
@@ -141,7 +214,8 @@
         link.title = provider.displayName;
         link.dataset.providerKey = provider.key;
         link.classList.add("jellyfin-provider-link");
-        link.style.setProperty("--provider-logo", `url("${absoluteUrl(provider.asset)}")`);
+        link.style.setProperty("--provider-logo", `url("${assetUrl}")`);
+        applyLogoSize(link, provider, assetUrl);
 
         return link;
     }

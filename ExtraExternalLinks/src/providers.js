@@ -11,18 +11,22 @@
      */
     window.JELLYFIN_EXTERNAL_LINKS_CONFIG = {
         debug: false,
+        defaultLogoHeight: 25,
+        fallbackLogoWidth: 145,
         providers: [
             {
                 key: "newgrounds",
                 displayName: "Newgrounds",
                 domains: ["newgrounds.com", "www.newgrounds.com"],
-                asset: "assets/newgrounds/image.png",
+                asset: "assets/Newgrounds/image.png",
+                logoHeight: 25,
             },
             {
                 key: "youtube",
                 displayName: "YouTube",
                 domains: ["youtube.com", "www.youtube.com", "youtu.be"],
-                asset: "assets/youtube/image.png",
+                asset: "assets/Youtube/image.png",
+                logoHeight: 25,
             },
         ],
     };
