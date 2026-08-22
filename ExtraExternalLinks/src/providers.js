@@ -10,7 +10,7 @@
      * https://cdn.jsdelivr.net/gh/YOUR_USERNAME/jellyfin-custom@main/assets/newgrounds/image.png
      */
     window.JELLYFIN_EXTERNAL_LINKS_CONFIG = {
-        debug: false,
+        debug: true,
         defaultLogoHeight: 25,
         fallbackLogoWidth: 45,
         providers: [
