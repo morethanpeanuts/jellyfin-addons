@@ -75,7 +75,30 @@ Each provider has:
     displayName: "Newgrounds",
     domains: ["newgrounds.com", "www.newgrounds.com"],
     asset: "assets/Newgrounds/image.png",
+    logoHeight: 25,
 }
+```
+
+Logo width is detected automatically from the image ratio. The addon keeps the height at `logoHeight` and calculates the width from the image's natural size.
+
+If automatic sizing does not look right, set the width yourself:
+
+```javascript
+{
+    key: "newgrounds",
+    displayName: "Newgrounds",
+    domains: ["newgrounds.com", "www.newgrounds.com"],
+    asset: "assets/Newgrounds/image.png",
+    logoHeight: 25,
+    logoWidth: 145,
+}
+```
+
+You can also change the defaults at the top of `src/providers.js`:
+
+```javascript
+defaultLogoHeight: 25,
+fallbackLogoWidth: 145,
 ```
 
 ## Add A Provider
@@ -94,6 +117,7 @@ assets/ProviderName/image.png
     displayName: "Provider Name",
     domains: ["provider.com", "www.provider.com"],
     asset: "assets/ProviderName/image.png",
+    logoHeight: 25,
 }
 ```
 
